@@ -21,12 +21,12 @@ private:
 public:
 
     MyStack(int = 2);
-    MyStack(const T&);
+    MyStack(const MyStack<T>&);
     ~MyStack() { delete [] values; } // decon
 
     void clear();
 
-    void push(const MyStack<T> &);
+    void push(const T &);
 
     void pop();
 

@@ -69,24 +69,23 @@ int main() {
 
     while (userInput) {
 
-        cout << "Enter a number : (Q to quit)";
-        cin >> num1;
-        calculator.push(num1);
-        clearCIN();
-        cout << endl;
-        if (cin.fail()) {
 
-            cout << "Exiting...\n";
-            userInput = false;
-            break;
+        if(calculator.size() != 1) {
+            cout << "Enter a number : (Q to quit)";
+            cin >> num1;
+            if (cin.fail()) {
 
+                cout << "Exiting...\n";
+                userInput = false;
+                break;
+
+            } // if
+            cout << endl;
+            calculator.push(num1);
         } // if
 
         cout << "Enter another number: (Q to quit)";
         cin >> num2;
-        calculator.push(num2);
-        clearCIN();
-        cout << endl;
         if (cin.fail()) {
 
             cout << "Exiting...\n";
@@ -94,6 +93,8 @@ int main() {
             break;
 
         } // if
+        cout << endl;
+        calculator.push(num2);
 
         cout << "Enter an addition (+), subtraction (-), "
                 "multiplication(*) or division (/) symbol to apply that action: (Q to quit)";
@@ -109,15 +110,59 @@ int main() {
             break;
 
         } else {
-            if (symbol == '+') {
+            while (calculator.size() != 1) {
+                if (calculation.peek() == '+') {
 
-            }// if
+                    num1 = calculator.peek();
+                    calculator.pop();
+                    num2 = calculator.peek();
+                    calculator.pop();
+                    cout << num1 << " + " << num2 << " = " << (num1 + num2) << endl;
+                    calculator.push((num1 + num2));
+                    calculation.pop();
 
+                }// if
+                else if (calculation.peek() == '-') {
 
-        }
+                    num1 = calculator.peek();
+                    calculator.pop();
+                    num2 = calculator.peek();
+                    calculator.pop();
+                    cout << num1 << " - " << num2 << " = " << (num1 - num2) << endl;
+                    calculator.push((num1 - num2));
+                    calculation.pop();
+                }// else if
+                else if (calculation.peek() == '*') {
 
+                    num1 = calculator.peek();
+                    calculator.pop();
+                    num2 = calculator.peek();
+                    calculator.pop();
+                    cout << num1 << " * " << num2 << " = " << (num1 * num2) << endl;
+                    calculator.push((num1 * num2));
+                    calculation.pop();
+                }// else if
+                else if (calculation.peek() == '/') {
 
-    }
+                    num1 = calculator.peek();
+                    calculator.pop();
+                    num2 = calculator.peek();
+                    calculator.pop();
+                    cout << num1 << " / " << num2 << " = " << (num1 / num2) << endl;
+                    calculator.push((num1 / num2));
+                    calculation.pop();
+                }// else if
+                else {
+                    cout << "Something went wrong." << endl;
+                    for (int i = 0; i < calculator.size(); ++i) {
+                        cout << "\t" << calculator.peek() << endl;
+                    } // for !! Display Stack  !!
+                    break;
+                }// else
+            }// while
+        } // else
+
+    } // while
 
 
     cout << "End Program." << endl;
