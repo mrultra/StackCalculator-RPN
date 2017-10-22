@@ -107,7 +107,7 @@ int main() {
 
             cout << "Exiting...\n";
             userInput = false;
-            break;
+            //break;
 
         } else {
             while (calculator.size() != 1) {
